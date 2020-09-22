@@ -6,8 +6,9 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+/*===================== Last Tests =====================*/
 func TestGetLastElementOfEmptyList(t *testing.T) {
-	lst := make([]int, 0)
+	lst := []int{}
 	_, err := Last(lst)
 	if err == nil {
 		t.Errorf("Last([]) err nil want 'Empty list provided' ")
@@ -16,8 +17,7 @@ func TestGetLastElementOfEmptyList(t *testing.T) {
 }
 
 func TestGetLastElementOfOneElementList(t *testing.T) {
-	lst := make([]int, 1)
-	lst[0] = 1
+	lst := []int{1}
 	last, err := Last(lst)
 	if err != nil {
 		t.Errorf("Error is not nil")
@@ -28,15 +28,65 @@ func TestGetLastElementOfOneElementList(t *testing.T) {
 }
 
 func TestGetLastElementOfBigList(t *testing.T) {
-	lst := make([]int, 3)
-	lst[0] = 1
-	lst[1] = 2
-	lst[2] = 3
+	lst := []int{1, 2, 3}
 	last, err := Last(lst)
 	if err != nil {
 		t.Errorf("Error is not nil")
 	}
 	if last != 3 {
 		t.Errorf("Last([1 2 3]) = %d wants %d", last, 3)
+	}
+}
+
+/*===================== Antepenultimate Tests =====================*/
+func TestGetAntepenultimateElementOfEmptyList(t *testing.T) {
+	lst := []int{}
+	_, err := Antepenultimate(lst)
+	if err == nil {
+		t.Errorf("Error should not be nil")
+	}
+	assert.EqualError(t, err, "List size is 0, should be >=2", "Should return an error")
+}
+
+func TestGetAntepenultimateElementOfOneElementList(t *testing.T) {
+	lst := []int{1}
+	_, err := Antepenultimate(lst)
+	if err == nil {
+		t.Errorf("Error should not be nil")
+	}
+	assert.EqualError(t, err, "List size is 1, should be >=2", "Should return an error")
+}
+
+func TestGetAntepenultimateElementOfBigList(t *testing.T) {
+	lst := []int{1, 2, 3}
+	antepenultimate, err := Antepenultimate(lst)
+	if err != nil {
+		t.Errorf("Error is not nil")
+	}
+	if antepenultimate != 2 {
+		t.Errorf("Antepenultimate([1 2 3]) = %d wants %d", antepenultimate, 2)
+	}
+}
+
+/*===================== ElementAt Tests =====================*/
+func TestGetKthElementOfListWithIncorrectKValue(t *testing.T) {
+	lst := []int{}
+	_, err := ElementAt(lst, 0)
+	assert.EqualError(t, err, "k-index should be >= 1, not < 1", "Should return an error")
+}
+func TestGetKthElementOfEmptyList(t *testing.T) {
+	lst := []int{}
+	_, err := ElementAt(lst, 2)
+	assert.EqualError(t, err, "k-index is bigger than list length", "Should return an error")
+}
+
+func TestGetKthElementOfBigList(t *testing.T) {
+	lst := []int{1, 2, 3, 4, 5}
+	kthElement, err := ElementAt(lst, 4)
+	if err != nil {
+		t.Errorf("Error is not nil")
+	}
+	if kthElement != 4 {
+		t.Errorf("Antepenultimate([1 2 3]) = %d wants %d", kthElement, 4)
 	}
 }
