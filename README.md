@@ -1,4 +1,5 @@
 # Let's go
+[![Go Report Card](https://goreportcard.com/badge/github.com/epsxy/lets-go)](https://goreportcard.com/report/github.com/epsxy/lets-go)
 
 ## Introduction
 
