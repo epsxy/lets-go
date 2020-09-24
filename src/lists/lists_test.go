@@ -90,3 +90,93 @@ func TestGetKthElementOfBigList(t *testing.T) {
 		t.Errorf("Antepenultimate([1 2 3]) = %d wants %d", kthElement, 4)
 	}
 }
+
+/*===================== Length Tests =====================*/
+func TestShouldGetListLength(t *testing.T) {
+	lst := []int{1, 2, 3, 4, 5}
+
+	l := Length(lst)
+
+	assert.Equal(t, l, 5, "List size should be 5")
+}
+
+/*===================== Reverse Tests =====================*/
+func TestShouldReverseEmptyList(t *testing.T) {
+	lst := []int{}
+
+	r := Reverse(lst)
+
+	assert.Equal(t, r, []int{}, "Should be empty list")
+}
+
+func TestShouldReverseList(t *testing.T) {
+	lst := []int{1, 2, 3, 4, 5}
+
+	r := Reverse(lst)
+
+	assert.Equal(t, r, []int{5, 4, 3, 2, 1}, "Should reverse list")
+}
+
+/*===================== IsPalindrome Tests =====================*/
+func TestShouldDeterminateNotPalindromeEvenList(t *testing.T) {
+	lst := []int{1, 2, 2, 4}
+
+	isPal := IsPalindrome(lst)
+
+	assert.False(t, isPal)
+}
+func TestShouldDeterminateNotPalindromeOddList(t *testing.T) {
+	lst := []int{1, 2, 3, 2, 4}
+
+	isPal := IsPalindrome(lst)
+
+	assert.False(t, isPal)
+}
+
+func TestShouldDeterminatePalindromeEmptyList(t *testing.T) {
+	lst := []int{}
+
+	isPal := IsPalindrome(lst)
+
+	assert.True(t, isPal)
+}
+
+func TestShouldDeterminatePalindromeEvenList(t *testing.T) {
+	lst := []int{1, 2, 3, 3, 2, 1}
+
+	isPal := IsPalindrome(lst)
+
+	assert.True(t, isPal)
+}
+func TestShouldDeterminatePalindromeOddList(t *testing.T) {
+	lst := []int{1, 2, 3, 4, 3, 2, 1}
+
+	isPal := IsPalindrome(lst)
+
+	assert.True(t, isPal)
+}
+
+/*===================== Flatten Tests =====================*/
+func TestShouldFlattenList(t *testing.T) {
+	nested := []*NestedString{
+		&NestedString{[]*NestedString{
+			&NestedString{[]*NestedString{}, "1.1"},
+			&NestedString{[]*NestedString{}, "1.2"},
+		}, "1"},
+		&NestedString{[]*NestedString{
+			&NestedString{[]*NestedString{}, "2.1"},
+			&NestedString{[]*NestedString{
+				&NestedString{[]*NestedString{}, "2.2.1"},
+			}, "2.2"},
+			&NestedString{[]*NestedString{}, "2.3"},
+		}, "2"},
+		&NestedString{[]*NestedString{
+			&NestedString{[]*NestedString{}, "3.1"},
+		}, "3"},
+	}
+
+	flattened := Flatten(nested)
+	expected := []string{"1", "1.1", "1.2", "2", "2.1", "2.2", "2.2.1", "2.3", "3", "3.1"}
+
+	assert.Equal(t, expected, flattened, "Should flatten nested list")
+}
