@@ -1,5 +1,7 @@
 # Let's go
 [![Go Report Card](https://goreportcard.com/badge/github.com/epsxy/lets-go)](https://goreportcard.com/report/github.com/epsxy/lets-go)
+![Build status](https://travis-ci.org/epsxy/lets-go.svg?branch=master&status=passed)
+[![Coverage Status](https://coveralls.io/repos/github/epsxy/lets-go/badge.svg?branch=master)](https://coveralls.io/github/epsxy/lets-go?branch=master)
 
 ## Introduction
 
