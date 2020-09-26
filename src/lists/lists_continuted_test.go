@@ -129,7 +129,7 @@ func TestShouldReturnErrorWhileExtractSliceWithWrongGreaterBounds(t *testing.T) 
 func TestShouldReturnErrorWhileExtractSliceWithWrongLowerBounds(t *testing.T) {
 	sample := []string{"a", "b", "c", "d", "e", "f", "g", "h"}
 
-	_, err := ExtractSlice(sample, 0, 9)
+	_, err := ExtractSlice(sample, 0, 8)
 
 	assert.NotNil(t, err, "Error should not be nil")
 }
@@ -185,4 +185,20 @@ func TestRemoveLastElement(t *testing.T) {
 
 	assert.Nil(t, err, "Error should be nil")
 	assert.Equal(t, expected, removed, "Should remove last element")
+}
+
+func TestRemoveLastElementShouldReturnErrorWithLowerBound(t *testing.T) {
+	sample := []string{"a", "b", "c", "d", "e", "f", "g", "h"}
+
+	_, err := RemoveKthElement(sample, 0)
+
+	assert.NotNil(t, err, "Error should not be nil")
+}
+
+func TestRemoveLastElementShouldReturnErrorWithGreaterBound(t *testing.T) {
+	sample := []string{"a", "b", "c", "d", "e", "f", "g", "h"}
+
+	_, err := RemoveKthElement(sample, 9)
+
+	assert.NotNil(t, err, "Error should not be nil")
 }
