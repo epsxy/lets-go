@@ -209,7 +209,7 @@ func TestShouldPackConsecutiveList(t *testing.T) {
 	assert.Equal(t, expected, packed, "Should pack consecutives")
 }
 
-/*===================== PackConsecutive Tests =====================*/
+/*===================== EncodeLength Tests =====================*/
 func TestShouldEncodeListLength(t *testing.T) {
 	sample := []string{"a", "a", "a", "b", "c", "c", "d", "d", "d", "d", "d", "e", "e", "f", "f", "g"}
 
