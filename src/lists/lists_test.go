@@ -180,3 +180,49 @@ func TestShouldFlattenList(t *testing.T) {
 
 	assert.Equal(t, expected, flattened, "Should flatten nested list")
 }
+
+/*===================== EliminateConsecutive Tests =====================*/
+func TestShouldEliminateConsecutiveList(t *testing.T) {
+	sample := []string{"a", "a", "a", "b", "c", "c", "d", "d", "d", "d", "d", "e", "e", "f", "f", "g"}
+
+	eliminated := EliminateConsecutive(sample)
+	expected := []string{"a", "b", "c", "d", "e", "f", "g"}
+
+	assert.Equal(t, expected, eliminated, "Should eliminate consecutives")
+}
+
+/*===================== PackConsecutive Tests =====================*/
+func TestShouldPackConsecutiveList(t *testing.T) {
+	sample := []string{"a", "a", "a", "b", "c", "c", "d", "d", "d", "d", "d", "e", "e", "f", "f", "g"}
+
+	packed := PackConsecutive(sample)
+	expected := [][]string{
+		[]string{"a", "a", "a"},
+		[]string{"b"},
+		[]string{"c", "c"},
+		[]string{"d", "d", "d", "d", "d"},
+		[]string{"e", "e"},
+		[]string{"f", "f"},
+		[]string{"g"},
+	}
+
+	assert.Equal(t, expected, packed, "Should pack consecutives")
+}
+
+/*===================== PackConsecutive Tests =====================*/
+func TestShouldEncodeListLength(t *testing.T) {
+	sample := []string{"a", "a", "a", "b", "c", "c", "d", "d", "d", "d", "d", "e", "e", "f", "f", "g"}
+
+	encoded := EncodeLength(sample)
+	expected := []EncodedElement{
+		EncodedElement{occurences: 3, element: "a"},
+		EncodedElement{occurences: 1, element: "b"},
+		EncodedElement{occurences: 2, element: "c"},
+		EncodedElement{occurences: 5, element: "d"},
+		EncodedElement{occurences: 2, element: "e"},
+		EncodedElement{occurences: 2, element: "f"},
+		EncodedElement{occurences: 1, element: "g"},
+	}
+
+	assert.Equal(t, expected, encoded, "Should encode list length")
+}

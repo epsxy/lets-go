@@ -1,6 +1,8 @@
 package lists
 
-import "errors"
+import (
+	"errors"
+)
 
 // NB:
 // Generics are, as of today, not yet implemented in Go. Here we use int lists
@@ -77,7 +79,48 @@ func Flatten(root []*NestedString) []string {
 }
 
 // EliminateConsecutive : eliminate consecutive elements of a list
+func EliminateConsecutive(lst []string) []string {
+	s := []string{}
+	for _, e := range lst {
+		if len(s) == 0 {
+			s = append(s, e)
+		}
+		if s[len(s)-1] != e {
+			s = append(s, e)
+		}
+	}
+	return s
+}
 
-// PackConsecutive : pack consecutive elements of a list
+// PackConsecutive : pack consecutive elements of a list into sublists
+func PackConsecutive(lst []string) [][]string {
+	s := [][]string{}
+	t := []string{}
+	for _, e := range lst {
+		if len(t) == 0 || t[len(t)-1] == e {
+			t = append(t, e)
+		} else {
+			s = append(s, t)
+			t = []string{}
+			t = append(t, e)
+		}
+	}
+	s = append(s, t)
+	return s
+}
+
+// EncodedElement encoding structure
+type EncodedElement struct {
+	occurences int
+	element    string
+}
 
 // EncodeLength : encode consecutive list elements
+func EncodeLength(lst []string) []EncodedElement {
+	p := PackConsecutive(lst)
+	res := make([]EncodedElement, len(p))
+	for i, e := range p {
+		res[i] = EncodedElement{occurences: len(e), element: e[0]}
+	}
+	return res
+}
